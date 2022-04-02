@@ -2,6 +2,7 @@ import * as React from "react";
 import { Box, Button, Divider, Grid, Typography, Link } from "@mui/material";
 
 import { useInput } from "@/hooks/useInput";
+//import { useRef } from "@/hooks/useRef";
 import { useContractKit } from "@celo-tools/use-contractkit";
 import { useEffect, useState } from "react";
 import { SnackbarAction, useSnackbar } from "notistack";
@@ -9,6 +10,8 @@ import { truncateAddress } from "@/utils";
 import { Storage } from "@celo-progressive-dapp-starter/hardhat/types/Storage";
 import { useQuery, gql } from "@apollo/client";
 import TextField from '@mui/material/TextField';
+import { Chip } from '@mui/material';
+import Avatar from '@mui/material/Avatar';
 
 // The Graph query endpoint is defined in ../apollo-client.js
 
@@ -50,6 +53,22 @@ export function StorageContract({ contractData }) {
       setContractLink(`${network.explorer}/address/${contractData.address}`);
     }
   }, [network, contractData]);
+
+  //const valueRef = useRef(null);
+
+  function handleTax(e) {
+    //e.preventDefault();
+    console.log('handleTax.' + e);
+    window.open("https://www.celo.tax");
+  }
+
+  function handleContractLink(e){
+    console.log('handleContractLink .' + e);
+    console.log('handleTax.' + e);
+    window.open(contractLink);
+  }
+
+  
 
   const setStorage = async () => {
     try {
@@ -101,49 +120,67 @@ export function StorageContract({ contractData }) {
     }
   };
 
+  function manageDonation(e){
+    console.log('this.refs.amountField.getValue()', this.refs.amountField.getValue())
+  }
+  
   return (
     <Grid sx={{ m: 1 }} container justifyContent="center">
       <Grid item sm={6} xs={12} sx={{ m: 2 }}>
-        <Typography variant="h5" component="div">
-          Fundation Contract:
+
+      <Typography variant="h5" component="div">
+          Step 1
+        </Typography>
+        <Chip label='Verify your celo taxes'  onClick={handleTax}  >
+            
+          </Chip>
+
+          <Typography variant="h5" component="div">
+          Step 2 
         </Typography>
 
         {contractData ? (
-          <Link variant="body1" href={contractLink} target="_blank"   >
-            {truncateAddress(contractData?.address)}
-          </Link>
+          <Chip label={'Verify the fundation Contract ' + truncateAddress(contractData?.address)}  onClick={handleContractLink}  >
+            
+          </Chip>
         ) : (
           <Typography component="div" variant="h1" >
             No contract detected for {network.name}
           </Typography>
         )}
 
-        <Divider component="div" sx={{ m: 1 }} />
-
-        <Typography variant="h6" component="div">
-          Specific Amount
+        <Typography variant="h5" component="div">
+          Step 3
         </Typography>
 
         <Divider component="div" sx={{ m: 1 }} />
 
         <TextField
+         //inputRef={valueRef}
           id="outlined-number"
-          label="Number"
+          label=" Enter you taxable donation"
           type="number"
           InputLabelProps={{
             shrink: true,
           }}
         />
 
-        <Button sx={{ m: 1, marginLeft: 0 }} variant="contained" onClick={setStorage}>
-          Donate my taxes
-        </Button>
+             {/* { <Divider component="div" sx={{ m: 1 }} /> } */}
+
+        <Button
+         onClick={manageDonation}
+        variant="contained"
+        color="secondary"
+        startIcon={<Avatar src={'logo.jpeg'} />}
+      >
+        Donate my taxes
+      </Button>
 
 
-        <Divider component="div" sx={{ m: 1 }} />
+        {/* <Divider component="div" sx={{ m: 1 }} /> */}
 
 
-        <Button variant="contained">View pass donations </Button>
+        {/* <Button variant="contained">View pass donations </Button> */}
 
       </Grid>
     </Grid>

@@ -4,7 +4,7 @@ import Head from "next/head";
 import { SnackbarProvider } from "notistack";
 import { ApolloProvider } from "@apollo/client";
 import client from "@/apollo-client";
-import { Alfajores, ContractKitProvider } from "@celo-tools/use-contractkit";
+import { Alfajores, ContractKitProvider, Mainnet } from "@celo-tools/use-contractkit";
 import { AppProps } from "next/app";
 import { CustomThemeProvider } from "@/contexts/userTheme";
 
@@ -18,7 +18,7 @@ function MyApp({ Component, pageProps }: AppProps): React.ReactElement {
           url: "https://use-contractkit.vercel.app",
           icon: "https://use-contractkit.vercel.app/favicon.ico",
         }}
-        network={Alfajores}
+        network={Mainnet}
         // networks={[Mainnet, Alfajores]}
       >
         <SnackbarProvider
