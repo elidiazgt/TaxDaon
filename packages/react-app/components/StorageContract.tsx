@@ -8,6 +8,7 @@ import { SnackbarAction, useSnackbar } from "notistack";
 import { truncateAddress } from "@/utils";
 import { Storage } from "@celo-progressive-dapp-starter/hardhat/types/Storage";
 import { useQuery, gql } from "@apollo/client";
+import TextField from '@mui/material/TextField';
 
 // The Graph query endpoint is defined in ../apollo-client.js
 
@@ -106,38 +107,43 @@ export function StorageContract({ contractData }) {
         <Typography variant="h5" component="div">
           Fundation Contract:
         </Typography>
+
         {contractData ? (
-          <Link href={contractLink} target="_blank">
+          <Link variant="body1" href={contractLink} target="_blank"   >
             {truncateAddress(contractData?.address)}
           </Link>
         ) : (
-          <Typography component="div">
+          <Typography component="div" variant="h1" >
             No contract detected for {network.name}
           </Typography>
         )}
+
         <Divider component="div" sx={{ m: 1 }} />
 
         <Typography variant="h6" component="div">
           Specific Amount
         </Typography>
-        <Box sx={{ m: 1, marginLeft: 0 }}>{setStorageInput}</Box>
+
+        <Divider component="div" sx={{ m: 1 }} />
+
+        <TextField
+          id="outlined-number"
+          label="Number"
+          type="number"
+          InputLabelProps={{
+            shrink: true,
+          }}
+        />
+
         <Button sx={{ m: 1, marginLeft: 0 }} variant="contained" onClick={setStorage}>
           Donate my taxes
         </Button>
+
+
         <Divider component="div" sx={{ m: 1 }} />
 
-        {/* <Typography variant="h6" component="div">
-          Read Contract
-        </Typography>
-        <Typography sx={{ m: 1, marginLeft: 0, wordWrap: "break-word" }} component="div">
-          Storage Contract Value: {storageValue}
-        </Typography>
-        <Button sx={{ m: 1, marginLeft: 0 }} variant="contained" onClick={getStorage}>
-          Read Storage Contract
-        </Button> */}
 
-
-        <Button variant="contained">Verify</Button>
+        <Button variant="contained">View pass donations </Button>
 
       </Grid>
     </Grid>

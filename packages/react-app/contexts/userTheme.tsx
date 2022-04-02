@@ -26,9 +26,13 @@ export const CustomThemeProvider = (props: PropsWithChildren<{}>) => {
   const mTheme = React.useMemo(
     () =>
       createTheme({
+
         palette: {
           primary: {
-            main: '#35D07F',
+            main: '#f9fafb',
+          },
+          secondary: {
+            main: '#3f3f46',
           },
           mode: themeString(theme),
         },

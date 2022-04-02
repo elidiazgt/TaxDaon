@@ -6,10 +6,12 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import Chip from "@mui/material/Chip";
+
 import { useContractKit } from "@celo-tools/use-contractkit";
 import { truncateAddress, getWindowDimensions } from "@/utils";
 import { ThemeSwitcher } from "../ThemeSwitcher";
 import { useThemeContext } from "@/contexts/userTheme";
+import CircularProgress from '@mui/material/CircularProgress';
 
 export function Header() {
   const { address, network, connect, destroy } = useContractKit();
@@ -22,7 +24,10 @@ export function Header() {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" >
         <Toolbar sx={{ gap: { md: 2, xs: 0.5 } } }>
-          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+
+<img src="logo.jpeg" alt="TaxDao logo" width='50px' height="50px"/>
+
+          <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
           TaxDAOn
           </Typography>
           {network && <Chip label={network.name} color="secondary" />}
