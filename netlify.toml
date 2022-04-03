@@ -7,6 +7,7 @@
   base = "/"
   publish = "packages/react-app/.next"
   command = "yarn build-ui"
+  node_version = "12.22.11"
 
 [[plugins]]
 package = "@netlify/plugin-nextjs"
