@@ -29,12 +29,15 @@ const QUERY = gql`
 
 
 export function StorageContract({ contractData }) {
+  console.log(
+    'contractData', contractData
+  )
   const { kit, address, network, performActions } = useContractKit();
   const [storageValue, setStorageValue] = useState<string | null>(null);
   const [storageInput, setStorageInput] = useInput({ type: "text" });
   const [contractLink, setContractLink] = useState<string | null>(null);
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
-  
+  var [donation, setDonation] = useState<number | null>(null);
   // Query the Graph endpoint specified in ../apollo-client.js 
   const { data: queryData, error: queryError } = useQuery(QUERY, {
     pollInterval: 2500,
@@ -67,8 +70,6 @@ export function StorageContract({ contractData }) {
     console.log('handleTax.' + e);
     window.open(contractLink);
   }
-
-  
 
   const setStorage = async () => {
     try {
@@ -120,9 +121,7 @@ export function StorageContract({ contractData }) {
     }
   };
 
-  function manageDonation(e){
-    console.log('this.refs.amountField.getValue()', this.refs.amountField.getValue())
-  }
+
   
   return (
     <Grid sx={{ m: 1 }} container justifyContent="center">
@@ -156,31 +155,32 @@ export function StorageContract({ contractData }) {
         <Divider component="div" sx={{ m: 1 }} />
 
         <TextField
-         //inputRef={valueRef}
+         //inputRef={donation}
           id="outlined-number"
           label=" Enter you taxable donation"
           type="number"
+          defaultValue={donation}
           InputLabelProps={{
             shrink: true,
           }}
+          onChange={(e) => {
+            console.log('donation',donation)
+            console.log('e.target.value',e.target.value);
+            let taxDonation= parseInt(e.target.value)
+            setDonation(taxDonation)
+            
+
+          }}
         />
 
-             {/* { <Divider component="div" sx={{ m: 1 }} /> } */}
-
         <Button
-         onClick={manageDonation}
+         //onClick={manageDonation}
         variant="contained"
         color="secondary"
         startIcon={<Avatar src={'logo.jpeg'} />}
       >
         Donate my taxes
       </Button>
-
-
-        {/* <Divider component="div" sx={{ m: 1 }} /> */}
-
-
-        {/* <Button variant="contained">View pass donations </Button> */}
 
       </Grid>
     </Grid>

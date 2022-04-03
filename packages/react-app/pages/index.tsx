@@ -19,6 +19,8 @@ export default function App() {
     setValue(newValue);
   };
 
+  console.log('deployedContracts', deployedContracts)
+
   const contracts =
     deployedContracts[network?.chainId?.toString()]?.[
       network?.name?.toLocaleLowerCase()

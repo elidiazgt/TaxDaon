@@ -163,3 +163,6 @@ You should now be able to view your new dApp from [http://localhost:3000](http:/
 ## Troubleshooting
 
 For M1 Mac developers who have installed nvm using brew, the server may crash. To resolve this issue, take a look here at this [solution](https://stackoverflow.com/a/67254340)
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/b3e013a6-fa34-40fc-b35a-f5d400340040/deploy-status)](https://app.netlify.com/sites/melodious-dragon-e1570b/deploys)
+
